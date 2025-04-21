@@ -33,7 +33,7 @@ A estrutura do projeto é organizada da seguinte forma:
 
 1. Clone o repositório:
    ```
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/eduardo-cpu/calculadora-investimentos
    ```
 2. Navegue até o diretório do projeto:
    ```
@@ -47,7 +47,7 @@ A estrutura do projeto é organizada da seguinte forma:
    ```
    npm run dev
    ```
-5. Acesse a aplicação em `http://localhost:3001` (ou a porta indicada no terminal quando o servidor iniciar).
+5. Acesse a aplicação em `http://localhost:3002` (ou a porta indicada no terminal quando o servidor iniciar).
 
 ## Contribuição
 
