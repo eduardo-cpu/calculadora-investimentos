@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 const Layout = ({ children, onNavigate }) => {
   return (
@@ -12,6 +13,7 @@ const Layout = ({ children, onNavigate }) => {
       </main>
       <Footer />
       <SpeedInsights />
+      <Analytics />
     </div>
   );
 };
