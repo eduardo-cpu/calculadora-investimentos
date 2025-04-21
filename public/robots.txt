@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Quando tiver um sitemap, descomente e atualize a linha abaixo
+# Sitemap: https://seu-dominio-aqui.com/sitemap.xml
