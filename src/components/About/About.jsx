@@ -97,7 +97,7 @@ const About = () => {
         <h2 className="text-xl font-bold mb-4">Contato</h2>
         <p className="text-gray-700">
           Para dúvidas, sugestões ou relatórios de problemas, entre em contato através do e-mail:
-          <a href="mailto:contato@investcalc.com.br" className="text-blue-600 ml-1 hover:underline">
+          <a href="mailto:espaula@inf.ufsm.br" className="text-blue-600 ml-1 hover:underline">
             contato@investcalc.com.br
           </a>
         </p>
