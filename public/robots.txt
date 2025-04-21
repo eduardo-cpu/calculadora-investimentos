@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# Quando tiver um sitemap, descomente e atualize a linha abaixo
-# Sitemap: https://seu-dominio-aqui.com/sitemap.xml
+# Sitemap para indexação em motores de busca
+Sitemap: https://calculadora-investimentos-zeta.vercel.app/sitemap.xml
