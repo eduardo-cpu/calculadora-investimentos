@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   root: '.', // Define explicitamente o diretório raiz
   publicDir: 'public', // Define explicitamente o diretório público
-  base: '/calculadora-investimentos/', // Nome do seu repositório no GitHub
+  base: '/', // Alterado para funcionar na Vercel
   server: {
     port: 3002,
     host: '0.0.0.0', // Configuração mais explícita para permitir acesso externo
