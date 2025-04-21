@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap para indexação em motores de busca
+Sitemap: https://calculadora-investimentos-zeta.vercel.app/sitemap.xml
