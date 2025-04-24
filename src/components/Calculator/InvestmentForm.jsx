@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+import CurrencyInput from '../UI/CurrencyInput';
 
 const InvestmentForm = ({ onCalculate }) => {
   const [formData, setFormData] = useState({
@@ -25,25 +26,19 @@ const InvestmentForm = ({ onCalculate }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <h2 className="text-xl font-bold mb-4">Dados do Investimento</h2>
       
-      <Input
-        label="Valor inicial (R$)"
-        type="number"
+      <CurrencyInput
+        label="Valor inicial"
         name="initialAmount"
         value={formData.initialAmount}
         onChange={handleChange}
-        min="0"
-        step="100"
         required
       />
       
-      <Input
-        label="Aporte mensal (R$)"
-        type="number"
+      <CurrencyInput
+        label="Aporte mensal"
         name="monthlyContribution"
         value={formData.monthlyContribution}
         onChange={handleChange}
-        min="0"
-        step="10"
         required
       />
       
