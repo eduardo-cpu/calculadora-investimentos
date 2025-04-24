@@ -11,7 +11,7 @@ import {
   Legend,
   Filler
 } from 'chart.js';
-import { formatCurrency } from '../../utils/formatCurrency';
+import { formatCurrencyBRL } from '../../utils/formatCurrency';
 
 // Registrando os componentes do Chart.js
 ChartJS.register(
@@ -66,7 +66,7 @@ const MonthlyReturnChart = ({ results }) => {
             if (label) {
               label += ': ';
             }
-            label += formatCurrency(context.parsed.y);
+            label += formatCurrencyBRL(context.parsed.y);
             return label;
           }
         }
@@ -83,7 +83,7 @@ const MonthlyReturnChart = ({ results }) => {
       y: {
         ticks: {
           callback: function(value) {
-            return formatCurrency(value);
+            return formatCurrencyBRL(value);
           }
         },
         title: {
@@ -108,7 +108,7 @@ const MonthlyReturnChart = ({ results }) => {
           Este gráfico mostra como o rendimento mensal cresce ao longo do tempo conforme o montante investido aumenta.
         </p>
         <p className="mt-1">
-          <span className="font-semibold">Último rendimento mensal:</span> {formatCurrency(results.lastMonthReturn)}
+          <span className="font-semibold">Último rendimento mensal:</span> {formatCurrencyBRL(results.lastMonthReturn)}
         </p>
       </div>
     </div>

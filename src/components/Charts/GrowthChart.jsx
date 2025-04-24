@@ -11,7 +11,7 @@ import {
   Legend,
   Filler
 } from 'chart.js';
-import { formatCurrency } from '../../utils/formatCurrency';
+import { formatCurrencyBRL } from '../../utils/formatCurrency';
 
 // Registrando os componentes do Chart.js
 ChartJS.register(
@@ -73,7 +73,7 @@ const GrowthChart = ({ results }) => {
             if (label) {
               label += ': ';
             }
-            label += formatCurrency(context.parsed.y);
+            label += formatCurrencyBRL(context.parsed.y);
             return label;
           }
         }
@@ -89,7 +89,7 @@ const GrowthChart = ({ results }) => {
       y: {
         ticks: {
           callback: function(value) {
-            return formatCurrency(value);
+            return formatCurrencyBRL(value);
           }
         }
       }

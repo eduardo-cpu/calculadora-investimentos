@@ -6,7 +6,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
-import { formatCurrency } from '../../utils/formatCurrency';
+import { formatCurrencyBRL } from '../../utils/formatCurrency';
 
 // Registrando os componentes do Chart.js necessários para o Doughnut chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -48,7 +48,7 @@ const InvestmentBreakdownChart = ({ results }) => {
         callbacks: {
           label: function(context) {
             const label = context.label || '';
-            const value = formatCurrency(context.raw);
+            const value = formatCurrencyBRL(context.raw);
             const percentage = ((context.raw / results.totalAmount) * 100).toFixed(1);
             return `${label}: ${value} (${percentage}%)`;
           }
@@ -68,21 +68,21 @@ const InvestmentBreakdownChart = ({ results }) => {
       <div className="mt-6 grid grid-cols-3 w-full text-center gap-4">
         <div className="bg-gray-100 p-3 rounded-lg">
           <p className="text-sm text-gray-600">Investimento Inicial</p>
-          <p className="font-bold">{formatCurrency(initialInvestment)}</p>
+          <p className="font-bold">{formatCurrencyBRL(initialInvestment)}</p>
           <p className="text-xs text-gray-500">
             {((initialInvestment / results.totalAmount) * 100).toFixed(1)}%
           </p>
         </div>
         <div className="bg-blue-50 p-3 rounded-lg">
           <p className="text-sm text-blue-600">Aportes Mensais</p>
-          <p className="font-bold">{formatCurrency(totalContributions - initialInvestment)}</p>
+          <p className="font-bold">{formatCurrencyBRL(totalContributions - initialInvestment)}</p>
           <p className="text-xs text-blue-500">
             {(((totalContributions - initialInvestment) / results.totalAmount) * 100).toFixed(1)}%
           </p>
         </div>
         <div className="bg-green-50 p-3 rounded-lg">
           <p className="text-sm text-green-600">Rendimentos</p>
-          <p className="font-bold">{formatCurrency(interestEarned)}</p>
+          <p className="font-bold">{formatCurrencyBRL(interestEarned)}</p>
           <p className="text-xs text-green-500">
             {((interestEarned / results.totalAmount) * 100).toFixed(1)}%
           </p>

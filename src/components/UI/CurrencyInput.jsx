@@ -8,6 +8,8 @@ const CurrencyInput = ({
   onChange, 
   placeholder = '0,00', 
   className = '',
+  error,
+  max,
   ...rest 
 }) => {
   const [displayValue, setDisplayValue] = useState('');
@@ -23,10 +25,17 @@ const CurrencyInput = ({
     const inputValue = e.target.value;
     const formattedValue = formatCurrencyInput(inputValue);
     
-    setDisplayValue(formattedValue);
+    // Converte o valor formatado para número
+    let numericValue = parseCurrencyBRL(formattedValue);
     
-    // Converte o valor formatado para número e chama o onChange
-    const numericValue = parseCurrencyBRL(formattedValue);
+    // Aplica o limite máximo se fornecido
+    if (max !== undefined && numericValue > max) {
+      numericValue = max;
+      // Atualiza o valor de exibição para o máximo formatado
+      setDisplayValue(formatCurrencyInput(max.toString().replace('.', ',')));
+    } else {
+      setDisplayValue(formattedValue);
+    }
     
     // Cria um objeto de evento simulado para manter a compatibilidade
     const syntheticEvent = {
@@ -55,10 +64,11 @@ const CurrencyInput = ({
           value={displayValue}
           onChange={handleChange}
           placeholder={placeholder}
-          className={`w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${className}`}
+          className={`w-full pl-9 pr-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-2 ${error ? 'focus:ring-red-500 focus:border-red-500' : 'focus:ring-blue-500 focus:border-blue-500'} ${className}`}
           {...rest}
         />
       </div>
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
   );
 };

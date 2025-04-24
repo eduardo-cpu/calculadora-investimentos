@@ -12,14 +12,63 @@ const InvestmentForm = ({ onCalculate }) => {
     estimatedInflation: 4
   });
 
+  const [errors, setErrors] = useState({});
+
+  const MAX_VALUES = {
+    initialAmount: 100000000000, // 100 bilhões
+    monthlyContribution: 100000000000, // 100 bilhões
+    interestRate: 1000, // 1000%
+    estimatedInflation: 100000 // 100.000%
+  };
+
+  const validateField = (name, value) => {
+    if (name in MAX_VALUES && value > MAX_VALUES[name]) {
+      return `O valor máximo permitido é ${new Intl.NumberFormat('pt-BR').format(MAX_VALUES[name])}${name.includes('Rate') || name.includes('Inflation') ? '%' : ''}`;
+    }
+    return null;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Verifica os valores máximos
+    const errorMessage = validateField(name, value);
+    
+    if (errorMessage) {
+      setErrors(prev => ({ ...prev, [name]: errorMessage }));
+      // Define o valor máximo permitido
+      setFormData(prev => ({ ...prev, [name]: MAX_VALUES[name] }));
+    } else {
+      // Limpa o erro se estiver dentro dos limites
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCalculate(formData);
+    
+    // Valida todos os campos antes de submeter
+    let isValid = true;
+    const newErrors = {};
+    
+    Object.entries(formData).forEach(([name, value]) => {
+      const errorMessage = validateField(name, value);
+      if (errorMessage) {
+        newErrors[name] = errorMessage;
+        isValid = false;
+      }
+    });
+    
+    setErrors(newErrors);
+    
+    if (isValid) {
+      onCalculate(formData);
+    }
   };
 
   return (
@@ -31,6 +80,8 @@ const InvestmentForm = ({ onCalculate }) => {
         name="initialAmount"
         value={formData.initialAmount}
         onChange={handleChange}
+        error={errors.initialAmount}
+        max={MAX_VALUES.initialAmount}
         required
       />
       
@@ -39,6 +90,8 @@ const InvestmentForm = ({ onCalculate }) => {
         name="monthlyContribution"
         value={formData.monthlyContribution}
         onChange={handleChange}
+        error={errors.monthlyContribution}
+        max={MAX_VALUES.monthlyContribution}
         required
       />
       
@@ -49,7 +102,9 @@ const InvestmentForm = ({ onCalculate }) => {
         value={formData.interestRate}
         onChange={handleChange}
         min="0"
+        max="1000"
         step="0.1"
+        error={errors.interestRate}
         required
       />
       
@@ -72,7 +127,9 @@ const InvestmentForm = ({ onCalculate }) => {
         value={formData.estimatedInflation}
         onChange={handleChange}
         min="0"
+        max="100000"
         step="0.1"
+        error={errors.estimatedInflation}
         required
       />
       

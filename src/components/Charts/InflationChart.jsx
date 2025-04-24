@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { formatCurrency } from '../../utils/formatCurrency';
+import { formatCurrencyBRL } from '../../utils/formatCurrency';
 
 // Registrando os componentes do Chart.js
 ChartJS.register(
@@ -71,7 +71,7 @@ const InflationChart = ({ results }) => {
             if (label) {
               label += ': ';
             }
-            label += formatCurrency(context.parsed.y);
+            label += formatCurrencyBRL(context.parsed.y);
             return label;
           }
         }
@@ -88,7 +88,7 @@ const InflationChart = ({ results }) => {
       y: {
         ticks: {
           callback: function(value) {
-            return formatCurrency(value);
+            return formatCurrencyBRL(value);
           }
         }
       }
