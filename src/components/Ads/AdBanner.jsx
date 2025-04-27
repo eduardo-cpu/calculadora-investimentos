@@ -1,16 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AdBanner = ({ adSlot, format = 'auto', style = {} }) => {
+  const [hasEnoughContent, setHasEnoughContent] = useState(false);
+
   useEffect(() => {
-    try {
-      // Verifica se AdSense já foi inicializado
-      if (window.adsbygoogle) {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }
-    } catch (e) {
-      console.error('Erro ao renderizar anúncio:', e);
-    }
+    // Verificar se há conteúdo suficiente na página antes de mostrar anúncios
+    const checkContentAmount = () => {
+      // Obter o conteúdo principal da página (excluindo cabeçalho, rodapé e os próprios anúncios)
+      const contentElements = document.querySelectorAll('main p, main h1, main h2, main h3, main li, main table, main .content-element');
+      
+      // Considerar suficiente se houver pelo menos 3 elementos de conteúdo ou texto com mais de 300 caracteres
+      let totalTextLength = 0;
+      contentElements.forEach(el => {
+        totalTextLength += el.textContent.trim().length;
+      });
+      
+      setHasEnoughContent(contentElements.length >= 3 || totalTextLength > 300);
+    };
+    
+    // Verificar após o carregamento completo da página
+    setTimeout(checkContentAmount, 500);
   }, []);
+
+  useEffect(() => {
+    // Inicializar AdSense apenas quando há conteúdo suficiente
+    if (hasEnoughContent) {
+      try {
+        if (window.adsbygoogle) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      } catch (e) {
+        console.error('Erro ao renderizar anúncio:', e);
+      }
+    }
+  }, [hasEnoughContent]);
+
+  // Não exibir o anúncio se não houver conteúdo suficiente
+  if (!hasEnoughContent) {
+    return null;
+  }
 
   return (
     <div className="ad-container my-6 border border-gray-200 rounded-lg p-1 bg-gray-50">
