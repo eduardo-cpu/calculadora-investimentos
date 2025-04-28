@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from '../UI/Card';
-import AdBanner from '../Ads/AdBanner';
 
 const About = () => {
-  const [showAds, setShowAds] = useState(false);
-  
-  // Garantir que os anúncios só serão exibidos depois que a página estiver totalmente carregada
-  useEffect(() => {
-    // Aguardar o carregamento completo da página e aguardar mais 1 segundo para garantir
-    const timer = setTimeout(() => {
-      setShowAds(true);
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">
@@ -33,9 +20,6 @@ const About = () => {
           sobre seu poder de compra futuro.
         </p>
       </Card>
-
-      {/* Banner de anúncio após a introdução - exibido apenas quando a página estiver carregada */}
-      {showAds && <AdBanner adSlot="3456789012" />}
 
       <Card>
         <h2 className="text-xl font-bold mb-4">Funcionalidades</h2>
@@ -64,9 +48,6 @@ const About = () => {
           você terá acumulado e quanto será o rendimento mensal no final do período.
         </p>
       </Card>
-
-      {/* Banner de anúncio no meio do conteúdo - exibido apenas quando a página estiver carregada */}
-      {showAds && <AdBanner adSlot="5678901234" />}
 
       <Card>
         <h2 className="text-xl font-bold mb-4">Tecnologias Utilizadas</h2>
