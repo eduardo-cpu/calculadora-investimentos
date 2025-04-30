@@ -39,8 +39,8 @@ const AdBanner = ({ adSlot, format = 'auto', style = {} }) => {
       } else {
         const script = document.createElement('script');
         script.async = true;
-        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-        script.setAttribute('data-ad-client', 'ca-pub-1059432615504954');
+        script.crossOrigin = 'anonymous';
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1059432615504954';
         script.onload = initAd;
         document.head.appendChild(script);
       }
