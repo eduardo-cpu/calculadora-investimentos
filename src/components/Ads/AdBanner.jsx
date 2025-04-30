@@ -23,14 +23,26 @@ const AdBanner = ({ adSlot, format = 'auto', style = {} }) => {
   }, []);
 
   useEffect(() => {
-    // Inicializar AdSense apenas quando há conteúdo suficiente
+    // Carregar script do AdSense e inicializar anúncio somente se houver conteúdo suficiente
     if (hasEnoughContent) {
-      try {
-        if (window.adsbygoogle) {
+      const initAd = () => {
+        try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.error('Erro ao renderizar anúncio:', e);
         }
-      } catch (e) {
-        console.error('Erro ao renderizar anúncio:', e);
+      };
+
+      const existingScript = document.querySelector('script[src*="googlesyndication"]');
+      if (existingScript) {
+        initAd();
+      } else {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+        script.setAttribute('data-ad-client', 'ca-pub-1059432615504954');
+        script.onload = initAd;
+        document.head.appendChild(script);
       }
     }
   }, [hasEnoughContent]);
