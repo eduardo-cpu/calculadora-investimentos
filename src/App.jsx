@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Layout from './components/Layout/Layout';
 import Calculator from './components/Calculator/Calculator';
 import About from './components/About/About';
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
+import Terms from './components/Terms/Terms';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('calculator');
@@ -19,6 +21,8 @@ function App() {
         )}
         
         {currentPage === 'about' && <About />}
+        {currentPage === 'privacy' && <PrivacyPolicy />}
+        {currentPage === 'terms' && <Terms />}
       </div>
     </Layout>
   );

@@ -36,6 +36,24 @@ const Header = ({ onNavigate }) => {
                 Sobre
               </a>
             </li>
+            <li>
+              <a 
+                href="#" 
+                className="text-white hover:text-blue-200 transition"
+                onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }}
+              >
+                Política de Privacidade
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#" 
+                className="text-white hover:text-blue-200 transition"
+                onClick={(e) => { e.preventDefault(); onNavigate('terms'); }}
+              >
+                Termos de Serviço
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
