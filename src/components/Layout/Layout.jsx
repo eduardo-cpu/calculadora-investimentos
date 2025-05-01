@@ -11,7 +11,7 @@ const Layout = ({ children, onNavigate }) => {
       <Header onNavigate={onNavigate} />
       <main className="flex-grow bg-gray-50">
         {children}
-        <AdBanner adSlot="1234567890" />
+        <AdBanner adSlot="2148739899" />
       </main>
       <Footer />
       <SpeedInsights />

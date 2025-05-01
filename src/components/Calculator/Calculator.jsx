@@ -82,7 +82,7 @@ const Calculator = () => {
       </div>
 
       {/* Banner de anúncio exibido apenas quando houver resultados */}
-      {results && <AdBanner adSlot="1234567890" />}
+      {results && <AdBanner adSlot="2148739899" />}
 
       {/* Conteúdo educacional adicional que aparece sempre - independente se há resultados */}
       <Card>
@@ -120,7 +120,7 @@ const Calculator = () => {
           </div>
           
           {/* Banner de anúncio entre os gráficos - também condicionado à existência de resultados */}
-          {results && <AdBanner adSlot="0987654321" />}
+          {results && <AdBanner adSlot="2148739899" />}
           
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <Card>
