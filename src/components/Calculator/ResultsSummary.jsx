@@ -11,8 +11,14 @@ const ResultsSummary = ({ results }) => {
     purchasingPowerLoss,
     lastMonthReturn,
     averageMonthlyReturn,
+    irAliquot,
+    netInterestEarned,
+    netTotalAmount,
+    effectiveAnnualRate,
     formData
   } = results;
+
+  const netAnnualRate = parseFloat(formData.interestRate) * (1 - irAliquot);
 
   return (
     <div className="space-y-4">
@@ -55,6 +61,28 @@ const ResultsSummary = ({ results }) => {
         <div className="bg-gray-50 p-4 rounded-lg">
           <h3 className="font-medium text-gray-800">Aportes Totais</h3>
           <p className="text-xl font-bold text-gray-600">{formatCurrencyBRL(totalContributions)}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4">
+        <div className="bg-red-50 p-4 rounded-lg">
+          <h3 className="font-medium text-red-800">Alíquota IR</h3>
+          <p className="text-xl font-bold text-red-600">{(irAliquot * 100).toFixed(1)}%</p>
+        </div>
+        <div className="bg-green-100 p-4 rounded-lg">
+          <h3 className="font-medium text-green-800">Juros Líquidos</h3>
+          <p className="text-xl font-bold text-green-600">{formatCurrencyBRL(netInterestEarned)}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="bg-blue-50 p-4 rounded-lg">
+          <h3 className="font-medium text-blue-800">Total após IR</h3>
+          <p className="text-2xl font-bold text-blue-600">{formatCurrencyBRL(netTotalAmount)}</p>
+        </div>
+        <div className="bg-yellow-50 p-4 rounded-lg">
+          <h3 className="font-medium text-yellow-800">Taxa anual líquida (após IR)</h3>
+          <p className="text-xl font-bold text-yellow-600">{netAnnualRate.toFixed(2)}%</p>
         </div>
       </div>
 

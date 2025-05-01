@@ -75,15 +75,31 @@ export const calculateInvestment = (
       });
     }
   }
-  
+
+  // Calcular imposto de renda sobre rendimentos
+  const totalInterest = currentBalance - totalContributions;
+  let irAliquot;
+  if (totalMonths <= 6) irAliquot = 0.225;
+  else if (totalMonths <= 12) irAliquot = 0.20;
+  else if (totalMonths <= 24) irAliquot = 0.175;
+  else irAliquot = 0.15;
+
+  const netInterestEarned = totalInterest * (1 - irAliquot);
+  const netTotalAmount = totalContributions + netInterestEarned;
+  const effectiveAnnualRate = Math.pow(netTotalAmount / initialAmount, 1 / timeInYears) - 1;
+
   return {
     initialInvestment: initialAmount,
     totalContributions: totalContributions,
-    interestEarned: currentBalance - totalContributions,
+    interestEarned: totalInterest,
+    irAliquot,
+    netInterestEarned,
     totalAmount: currentBalance,
+    netTotalAmount,
+    effectiveAnnualRate,
     monthlyData,
     yearlyData,
     lastMonthReturn: lastMonthInterest,
-    averageMonthlyReturn: (currentBalance - totalContributions) / totalMonths
+    averageMonthlyReturn: totalInterest / totalMonths
   };
 };
