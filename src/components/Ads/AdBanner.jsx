@@ -23,26 +23,12 @@ const AdBanner = ({ adSlot, format = 'auto', style = {} }) => {
   }, []);
 
   useEffect(() => {
-    // Carregar script do AdSense e inicializar anúncio somente se houver conteúdo suficiente
+    // Inicializar anúncio se houver conteúdo suficiente (script carregado estaticamente no head)
     if (hasEnoughContent) {
-      const initAd = () => {
-        try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error('Erro ao renderizar anúncio:', e);
-        }
-      };
-
-      const existingScript = document.querySelector('script[src*="googlesyndication"]');
-      if (existingScript) {
-        initAd();
-      } else {
-        const script = document.createElement('script');
-        script.async = true;
-        script.crossOrigin = 'anonymous';
-        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1059432615504954';
-        script.onload = initAd;
-        document.head.appendChild(script);
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Erro ao renderizar anúncio:', e);
       }
     }
   }, [hasEnoughContent]);
