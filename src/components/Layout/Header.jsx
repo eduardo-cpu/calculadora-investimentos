@@ -59,6 +59,18 @@ const Header = ({ onNavigate }) => {
                   className="text-white hover:text-blue-200 transition"
                   onClick={(e) => {
                     e.preventDefault();
+                    onNavigate('lci-lca-converter');
+                  }}
+                >
+                  Conversor LCI/LCA
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  className="text-white hover:text-blue-200 transition"
+                  onClick={(e) => {
+                    e.preventDefault();
                     onNavigate('about');
                   }}
                 >
@@ -102,6 +114,19 @@ const Header = ({ onNavigate }) => {
                   }}
                 >
                   Início
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  className="text-white hover:text-blue-200 transition block"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('lci-lca-converter');
+                    setMenuOpen(false);
+                  }}
+                >
+                  Conversor LCI/LCA
                 </a>
               </li>
               <li>

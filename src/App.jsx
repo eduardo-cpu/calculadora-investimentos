@@ -4,6 +4,7 @@ import Calculator from './components/Calculator/Calculator';
 import About from './components/About/About';
 import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import Terms from './components/Terms/Terms';
+import LciLcaConverter from './components/Converter/LciLcaConverter';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('calculator');
@@ -17,6 +18,15 @@ function App() {
               Calculadora de Investimentos
             </h1>
             <Calculator />
+          </>
+        )}
+        
+        {currentPage === 'lci-lca-converter' && (
+          <>
+            <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">
+              Conversor LCI/LCA para CDI
+            </h1>
+            <LciLcaConverter />
           </>
         )}
         
