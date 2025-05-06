@@ -14,19 +14,26 @@ const Calculator = () => {
   const [results, setResults] = useState(null);
 
   const handleCalculate = (formData) => {
+    // Extrair e validar os parâmetros do formulário
+    const initialAmount = parseFloat(formData.initialAmount);
+    const monthlyContribution = parseFloat(formData.monthlyContribution);
+    const interestRate = parseFloat(formData.interestRate) / 100;
+    const timeInYears = parseFloat(formData.timeInYears);
+    const estimatedInflation = parseFloat(formData.estimatedInflation) / 100;
+
     // Calcular investimento
     const investmentResults = calculateInvestment(
-      parseFloat(formData.initialAmount),
-      parseFloat(formData.monthlyContribution),
-      parseFloat(formData.interestRate) / 100,
-      parseInt(formData.timeInYears)
+      initialAmount,
+      monthlyContribution,
+      interestRate,
+      timeInYears
     );
 
     // Calcular impacto da inflação
     const inflationImpact = calculateInflationImpact(
       investmentResults.totalAmount,
-      parseFloat(formData.estimatedInflation) / 100,
-      parseInt(formData.timeInYears)
+      estimatedInflation,
+      timeInYears
     );
 
     setResults({

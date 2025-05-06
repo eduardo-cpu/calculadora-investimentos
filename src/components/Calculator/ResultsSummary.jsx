@@ -19,6 +19,11 @@ const ResultsSummary = ({ results }) => {
   } = results;
 
   const netAnnualRate = parseFloat(formData.interestRate) * (1 - irAliquot);
+  
+  // Determina o texto de período com base na unidade de tempo
+  const periodText = formData.timeUnit === 'months' 
+    ? `${formData.originalTimeInMonths} ${formData.originalTimeInMonths === 1 ? 'mês' : 'meses'}`
+    : `${formData.timeInYears} ${formData.timeInYears === 1 ? 'ano' : 'anos'}`;
 
   return (
     <div className="space-y-4">
@@ -28,6 +33,9 @@ const ResultsSummary = ({ results }) => {
         <div className="bg-blue-50 p-4 rounded-lg">
           <h3 className="font-medium text-blue-800">Valor Total</h3>
           <p className="text-2xl font-bold text-blue-600">{formatCurrencyBRL(totalAmount)}</p>
+          <p className="text-sm text-blue-600 mt-1">
+            {`Em ${periodText}`}
+          </p>
         </div>
         
         <div className="bg-green-50 p-4 rounded-lg">

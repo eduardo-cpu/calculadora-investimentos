@@ -9,7 +9,8 @@ const InvestmentForm = ({ onCalculate }) => {
     monthlyContribution: 100,
     interestRate: 5,
     timeInYears: 10,
-    estimatedInflation: 4
+    estimatedInflation: 4,
+    timeUnit: 'years' // Nova propriedade para controlar a unidade de tempo
   });
 
   const [errors, setErrors] = useState({});
@@ -67,7 +68,16 @@ const InvestmentForm = ({ onCalculate }) => {
     setErrors(newErrors);
     
     if (isValid) {
-      onCalculate(formData);
+      // Converte o tempo em meses se necessário antes de enviar para o cálculo
+      const calculationData = { ...formData };
+      
+      // Se a unidade for meses, converte para anos para o cálculo
+      if (formData.timeUnit === 'months') {
+        calculationData.timeInYears = parseFloat((formData.timeInYears / 12).toFixed(2));
+        calculationData.originalTimeInMonths = parseFloat(formData.timeInYears); // Preserva o valor original em meses
+      }
+      
+      onCalculate(calculationData);
     }
   };
 
@@ -108,17 +118,32 @@ const InvestmentForm = ({ onCalculate }) => {
         required
       />
       
-      <Input
-        label="Tempo (anos)"
-        type="number"
-        name="timeInYears"
-        value={formData.timeInYears}
-        onChange={handleChange}
-        min="1"
-        max="50"
-        step="1"
-        required
-      />
+      <div className="flex gap-4 items-start">
+        <div className="flex-grow">
+          <Input
+            label={`Tempo (${formData.timeUnit === 'years' ? 'anos' : 'meses'})`}
+            type="number"
+            name="timeInYears"
+            value={formData.timeInYears}
+            onChange={handleChange}
+            min={formData.timeUnit === 'years' ? '1' : '1'}
+            max={formData.timeUnit === 'years' ? '50' : '600'} // 50 anos = 600 meses
+            step="1"
+            required
+          />
+        </div>
+        <div className="mt-8">
+          <select
+            name="timeUnit"
+            value={formData.timeUnit}
+            onChange={handleChange}
+            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="years">Anos</option>
+            <option value="months">Meses</option>
+          </select>
+        </div>
+      </div>
       
       <Input
         label="Estimativa de inflação anual (%)"
