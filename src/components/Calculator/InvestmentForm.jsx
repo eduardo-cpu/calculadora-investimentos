@@ -127,7 +127,7 @@ const InvestmentForm = ({ onCalculate }) => {
             value={formData.timeInYears}
             onChange={handleChange}
             min={formData.timeUnit === 'years' ? '1' : '1'}
-            max={formData.timeUnit === 'years' ? '50' : '600'} // 50 anos = 600 meses
+            max={formData.timeUnit === 'years' ? '150' : '1800'} // 150 anos = 1800 meses
             step="1"
             required
           />
